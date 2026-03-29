@@ -7,7 +7,7 @@
 </head>
 <body>
     <header>
-        <nav class="nav">
+        <nav class="nav" id="nav">
             <ul>
                 <li><a href="index.html">home</a></li>
                 <li><a href="TMR.html">TMR関連</a></li>
@@ -25,6 +25,7 @@
     </header>
     <main>
         <div class="sidebar">
+            <p><a href="#nav">TOP</a></p>
             <ol>
                 <li><a href="#datetime">日付を datetime に変換する。</a></li>
                 <li><a href="#numeric">dfのA列を数値に変換する。</a></li>
@@ -84,15 +85,15 @@
                     <p> # outer:dfとdf_addressの行をすべて残す。全部盛り。</p><br>
 
                 <li id="欠損値処理">欠損値(Nan)処理</li>
-                    <p>① df["A"].isna()</p>
-                    <p>② df["A"].fillna(0) #欠損値を0で置き換える。</p>
-                    <p>③ df.dropna(subset=["A"] #A列に欠損値(NaN)が含まれる列をすべて削除する。</p><br>
+                    <p>① df = df["A"].dropna() # 欠損値の行を削除する。</p>
+                    <p>② df = df["A"].isna() # 欠損値かどうかを判断する。(Ture/Falseをかえす)</p>
                 
                 <li id="sort/drop_duplicates">sort/drop_duplicates</li>
                     <p>① timeの順番で行をソートする。</p>
-                    <p>df.sort_values("time")</p>
-                    <p>② lotと時間の重複行を削除する。</p>
-                    <p>df.drop_dulicates(subset=["lot","time"])</p><br>
+                    <p>df = df.sort_values("time")</p>
+                    <p>② lotの重複行を削除する。</p>
+                    <p>df = df.drop_dulicates(subset="lot",keep="last")</p>
+                    <p># 「keep="last"」は、同じロットナンバーがあるときに、最後の1件だけを残すという意味。複数回の検査がある場合、最後の検査データが残る。</p><br>
                 
                 <li id="時間平均">時間平均</li>
                     <p>df["time"] = pd.to_datetime(df["time"])</p>

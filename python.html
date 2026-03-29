@@ -24,32 +24,46 @@
 
     </header>
     <main>
-        <ol>
-            <li><a href="python_data_analysis.html">データ分析</a></li>
-            <li><a href="python_seaborn.html">seaborn</a></li>
-            <li><a href="python_scraping.html">スクレイピング</a></li>
-            <li><a href="python_others.html">その他</a>
-        </ol>
+        <div class="sidebar">
+            <p><a href="#nav">TOP</a></p>
 
-        <h3>【基本文法】</h3>
             <ol>
-                <li>「**」:べき乗  (例：2<strong>**</strong>3 → 8(=2^3))</li>
-                <li>「//」:除算(余りを捨てる) (例：7<strong>//</strong>3 → 2(=<strong>2</strong>*3+1))</li>
-                <li>「%」:余剰(余りを取得) (例:7<strong>%</strong>3 → 1(=2*3+<strong>>1</strong>))</li><br>
-                <li>「"r"」:読み取りモード</li>
-                <li>「"w"」:新規書き込みモード（既に中身があれば全部消えて上書きされるので注意▲!）</li>
-                <li>「"a」：追記モード（ファイルがなければ作成、既存の内容は消えない）</li><br>
-                <li>数字を文字列にする。：str(num)</li>
-                <li>文字列を数字にする。：int(str)</li>
+                <li>基本文法</li>
+                    <ul>               
+                        <li><a href="python_data_analysis.html">データ分析</a></li>
+                    </ul>
+                <li>グラフ化関連</li>
+                    <ul>
+                        <li><a href="python_seaborn.html">seaborn</a></li>
+                    </ul>
+                <li>スクレイピング</li>
+                    <ul>
+                        <li><a href="python_scraping.html">スクレイピング</a></li>
+                    </ul>
+            </ol>            
+        </div>
+        <div class="main_frame">
+            <h3>【基本文法】</h3>
+                <ol>
+                    <li>「**」:べき乗  (例：2<strong>**</strong>3 → 8(=2^3))</li>
+                    <li>「//」:除算(余りを捨てる) (例：7<strong>//</strong>3 → 2(=<strong>2</strong>*3+1))</li>
+                    <li>「%」:余剰(余りを取得) (例:7<strong>%</strong>3 → 1(=2*3+<strong>>1</strong>))</li><br>
+                    <li>「"r"」:読み取りモード</li>
+                    <li>「"w"」:新規書き込みモード（既に中身があれば全部消えて上書きされるので注意▲!）</li>
+                    <li>「"a」：追記モード（ファイルがなければ作成、既存の内容は消えない）</li><br>
+                    <li>数字を文字列にする。：str(num)</li>
+                    <li>文字列を数字にする。：int(str)</li>
 
-            </ol>
+                </ol>
 
-        <h3>【面内分布の解析】</h3>
-            <ol>
-                <li>規格値以上、以下をカウントする。</li>
-                <p>UpperNgCount = (df["Sensitivity"] >= 1).sum()</p>
-                <p>LowerNgCount = (df["Sensitivity"] <= -1).sum()</p>
-            </ol>
+            <h3>【面内分布の解析】</h3>
+                <ol>
+                    <li>規格値以上、以下をカウントする。</li>
+                    <p>UpperNgCount = (df["Sensitivity"] >= 1).sum()</p>
+                    <p>LowerNgCount = (df["Sensitivity"] <= -1).sum()</p>
+                </ol>
+        </div>
+
 
             
     </main>
