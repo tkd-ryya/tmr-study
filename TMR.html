@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav id="nav" class="nav">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+        <div class="sidebar">
+            <ol>
+                <p><a href="#nav">TOP</a></p>
+                <li><a href="#TMRセンサー">TMRセンサーとは</a></li>
+                <li><a href="#磁性体の種類">磁性体の種類</a></li>
+                <li><a href="#ヒステリシス損">ヒステリシス損</a></li>
+                <li><a href="#RIE">RIE</a></li>
+
+            </ol>
+        </div>
+        <div class="main_frame">
+            <h3 id="TMRセンサー">TMRセンサーとは</h3>
+                <p>量子トンネル現象を利用した高感度・高精度な磁気センサーのこと。</p>
+            <h3 id="磁性体の種類">磁性体の種類</h3>
+                <img src="images/磁性体の種類.png" alt="" width="1000px">
+            <h3 id="ヒステリシス損">ヒステリシス損</h3>
+                <img src="images/ヒステリシス損_01.png" alt="" width="300px">
+                <p>銅線を巻いて、コイルの状態にする。</p>
+                <p>その状態で電流を流すと右ねじの方向により、赤矢印の磁場が発生する。</p>                
+                <img src="images/ヒステリシス損_02.png" alt="" width="500px">
+                <p>磁場の発生により、分子磁石の向きが揃ってくる。この磁性体が磁石の力を持ち始める。これを<strong>「磁化」</strong>という。</p>
+                <p>さらに大きな磁場をかけると、さらに多くの分子磁石が磁場方向にそろう。すべての分子磁石の向きが揃った場合、これを<strong>「磁気飽和」</strong>という。</p>
+                <img src="images/ヒステリシス損_03.png" alt="" width="500px">
+                <p>次に交流電圧をかけたとする。</p>
+                <p>磁界の方向が交互に変わり、分子磁石が回転する。</p>
+                <img src="images/ヒステリシス損_04.png" alt="" width="500px">
+                <p>分子磁石の回転により、摩擦熱が発生し、電気エネルギーを消費する。</p>
+                <p>この消費するエネルギーのことを<strong>「ヒステリシス損」</strong>という。</p><br>
+                <p>コイルによって、磁場Hを発生させる。（右ねじの法則）</p>
+                <p>中の分子磁石が揃い、磁化して、<strong>「磁束密度B」</strong>になる。</p>
+                <img src="images/ヒステリシス損_05.png" alt="" width="1000px">
+                <p>理想は磁場H[A/m]と磁束密度B[T]が線形であること。</p>
+                <p>しかし、実際には「磁気飽和」が発生する為、磁化が飽和した時点で、磁場Hを増やしても、磁束密度Bは増えていかなくなる。</p>
+                <img src="images/ヒステリシス損_06.png" alt="" width="1000px">
+                <p>次にコイルによる磁場Hを0の状態にする。</p>
+                <p>そのとき、理想は磁性体の磁束密度が0になること。</p>
+                <p>しかし、そうはならない。</p>
+                <p>実際は、磁場Hを0にしても、磁性体には時期が残る。それを<strong>「残留磁気（記号：Br）」</strong>という。</p>
+                <img src="images/ヒステリシス損_07.png" alt="" width="1000px">
+                <p>ここからさらに磁場を減らして、マイナス側に持っていき、磁性体の磁束密度B=0の状態にする。</p>
+                <p>そのときの磁場を<strong>「保持力（記号：Hc）」</strong>という</p>
+                <img src="images/ヒステリシス損_08.png" alt="" width="1000px">
+                <p>さらに磁場Hをマイナス側にもっていくと、磁性体も逆方向に磁束密度を持つようになる。</p>
+                <p>磁場Hのマイナス方向も同様に、途中で磁気飽和が起こり、磁束密度の増加が止まる。</p>
+                <img src="images/ヒステリシス損_09.png" alt="" width="1000px">
+                <p>次に磁場をプラス側にかけていくと、磁性体の磁束密度Bも磁場Hにあわせて増えていく。</p>
+                <p>最終的には元の右上の位置に戻ってくる。ここで描かれた曲線を<strong>「ヒステリシス曲線」</strong>または<strong>「ヒステリシスループ」</strong>という。</p>
+                <img src="images/ヒステリシス損_10.png" alt="" width="1000px">
+                <p>永久磁石は、永久に磁化している状態（外部磁場の影響を受けにくい）性質が望ましいため、残留磁気：「大」、保持力：「大」が望ましい。</p>
+                <img src="images/ヒステリシス損_11.png" alt="" width="300px">
+
+                
+
+            <h3 id="RIE">RIE</h3>
+                <p>【マイクロローディング効果】</p>
+                <p>ドライエッチング(RIE)で掘る場合、パターン寸法が縮小するにつれて、エッチング速度はパターンの粗密性とアスペクト比に依存する傾向がある。<br>パターン密度が高い領域は、荒い領域に比べ、エッチング速度が遅くなる。</p>
+
+        </div>
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>

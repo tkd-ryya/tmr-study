@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+        <div class="sidebar">
+            <ol>
+                <li><a href="#datetime">日付を datetime に変換する。</a></li>
+                <li><a href="#numeric">dfのA列を数値に変換する。</a></li>
+                <li><a href="#list化">dfのA列をリストに変換する。</a></li>
+                <li><a href="#データフレーム化">リストをデータフレームに変換する。</a></li>
+                <li><a href="#条件抽出">条件抽出</a></li>
+                <li><a href="#groupby">groupby</a></li>
+                <li><a href="#merge">merge</a></li>
+                <li><a href="#欠損値処理">欠損値処理</a></li>
+                <li><a href="#sort/drop_duplicates">sort/重複行の削除</a></li>
+                <li><a href="#時間平均">時間平均</a></li>
+                <li><a href="#関数定義">関数を定義して条件で分岐を行う</a></li>
+                <li><a href="#高速化">df読込の高速化</a></li>
+                <li><a href="#ファイル名抽出">ファイル名抽出</a></li>
+                <li><a href="#複数のdfをエクセルに纏めて保存する">複数のdfをエクセルに纏めて保存する</a></li>
+                <li><a href="#グラフのPDF化">複数のグラフ画像を1つのPDFで出力する。</a></li>
+                <li><a href="#メモリ最適化">メモリ最適化</a></li>
+            </ol>
+        </div>
+
+        <div class="main_frame">
+        <h3>【Pandas】</h3>
+            <ol>
+                <li id="datetime">日付を datetime に変換する。</li>
+                    <p>df["date"] = pd.to_datetime(df["date"])</p><br>
+
+                <li id="numeric">dfのA列を数値に変換する。</li>
+                    <p>df["A"] = pd.to_numeric(df["A"] , errors = "coerce")</p><br>
+
+                <li id="list化">dfのA列をリストに変換する。</li>
+                    <p>A_list = df["A"].to_list()</p><br>
+
+                <li id="データフレーム化">リストをデータフレームに変換する。</li>
+                    <p>df = pd.DateFrame(A_list , columns=["A"])</p><br>
+
+                <li id="条件抽出">条件抽出</li>
+                    <p>① A列が100以上の行だけを抽出する。</p>
+                    <p>df_sub = df[df["A"]>=100]</p>
+                    <p>② lotが530C9、且つ、A列が100以上の列だけを抽出する。</p>
+                    <p>df_sub = df[(df["lot"]=="530C9") & (df["A"]>=100)]</p>
+                    <p>③ 判定列を作成し、Aが100より大きい行をNG、それ以外をOKにする。</p>
+                    <p>df["判定"] = np.where(df["A"]>=100 , "NG","OK")</p><br>
+                
+                <li id="groupby">groupby</li>
+                    <p>① ロットごとのSensitivityの平均を求める。</p>
+                    <p>df.groupby("lot")["Sensitivity"].mean()</p>
+                    <p>② 複数集計</p>
+                    <p>df.groupby("lot")["Sensitivity"].agg(["mean","max","min","count"])</p>
+                    <p>③ 条件付きgroupby</p>
+                    <p>df[df["Sensitivity"]>0].groupby("lot")["Sensitivity"].mean()</p><br>
+                
+                <li id="merge">merge</li>
+                    <p>df = df.merge(df_address , on="GrobalAddress" , how="left")</p>
+                    <p> # left:d1基準。d1の行はすべて残し、df_addressにないものはNaN(１番よく使う。)</p>
+                    <p> # right:d2基準。</p>
+                    <p> # inner:dfとdf_addressの両方に存在するキーの行だけ</p>
+                    <p> # outer:dfとdf_addressの行をすべて残す。全部盛り。</p><br>
+
+                <li id="欠損値処理">欠損値(Nan)処理</li>
+                    <p>① df["A"].isna()</p>
+                    <p>② df["A"].fillna(0) #欠損値を0で置き換える。</p>
+                    <p>③ df.dropna(subset=["A"] #A列に欠損値(NaN)が含まれる列をすべて削除する。</p><br>
+                
+                <li id="sort/drop_duplicates">sort/drop_duplicates</li>
+                    <p>① timeの順番で行をソートする。</p>
+                    <p>df.sort_values("time")</p>
+                    <p>② lotと時間の重複行を削除する。</p>
+                    <p>df.drop_dulicates(subset=["lot","time"])</p><br>
+                
+                <li id="時間平均">時間平均</li>
+                    <p>df["time"] = pd.to_datetime(df["time"])</p>
+                    <p>df.set_index("time").resample("1H").mean()</p><br>
+                
+                <li id="関数定義">関数を定義して条件で分岐を行う</li>
+                    <p>def class_test(x):</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;if x<=30:</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;return&ensp;"c"</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;elif x<=60:</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;return&ensp;"B"</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;else:</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;return&ensp;"A"</p>
+                    <p>df["rank"] = df["test"].apply(class_test)</p><br>
+
+                <li id="高速化">df読込の高速化</li>
+                    <p>①「必要な列だけ読み込む」</p>
+                    <p>usecols = ["lot","date","Sensitivity"]</p>
+                    <p>df = pd.read_csv(csv_file , usecols=usecols)</p><br>
+
+                    <p>②「読み込んだ結果を結合する場合はまとめる」</p>
+                    <p>dfs = []</p>
+                    <p>for file in files:</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;dfs.append(pd.read_csv(file,usecols = usecols))</p>
+                    <p>df = pd.concat(dfs , ignore_index = True)</p>
+                    <p># ignore_index=Trueは、結合後にndexを振りなおすという意味。</p><br>
+                
+                <li id="ファイル名抽出">ファイル名抽出</li>
+                    <p>from pathlib import pathlib</p>
+                    <p>files = //C:/user/takeda/folder/file.csv</a>
+                    <p>names = [Path(f).stem for f in files]</p><br>
+
+                <li id="複数のdfをエクセルに纏めて保存する" >複数のdfをエクセルに纏めて保存する</li>
+                    <p>with pd.ExcelWriter(r"\\c...\result.xlsx",engine="openpyxl) as writer:</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;for i , file in enemerate(file_list):</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;df = pd.read_csv(...)</p>
+                    <p>データ加工...(省略)</p>
+                    <p><sheet_name = f"{file}"</p>
+                    <p>df.to_excel(writer , sheet_name = sheet_name , index=False)</p><br>
+
+
+
+                <li id="グラフのPDF化">複数のグラフ画像を1つのPDFで出力する。</li>
+                    <p>from matplotlib.backends.backend.pdf import PdfPages</p>
+                    <p>import matplotlib.pyplot as plt</p>
+                    <p>with PdfPages(B0490_defect_data.pdf") as pdf:</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;for ...</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;fig,ax = plt.subplots(figsize=(13.333,7.5))</p>
+                    <P>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;ax.scatterplot(...)</P>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;plt.tight_layout()</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;pdf.savefig(fig)</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;plt.close(fig)</p>
+
+
+                
+                <li id="メモリ最適化">メモリ最適化</li>
+                    <p>df = pd.read_csv(file,dtype={"lot":"category","測定値":"float32"})</p><br>
+
+            </ol>
+        </div>
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">index</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+
+        <h3>cssセレクタ</h3>
+            <div>
+                <table class="table_css_tag">
+                    <tr>
+                        <th>書き方</th>
+                        <th>意味</th>
+                        <th>具体例</th>
+                        <th>説明</th>
+                    </tr>
+                    <tr>
+                        <td>div</td>
+                        <td>divタグ</td>
+                        <td>soup.select("div")</td>
+                        <td>ページ内のすべてのdivタグを取得する。</td>
+                    </tr>
+                    <tr>
+                        <td>.class</td>
+                        <td>class指定</td>
+                        <td>soup.select(".item")</td>
+                        <td>class="item"を持つ全要素を取得する。</td>
+                    </tr>
+                    <tr>
+                        <td>#id</td>
+                        <td>id指定</td>
+                        <td>soup.select("#main")</td>
+                        <td>id="main"の要素を取得する。（idは重複なしなので1つ）</td>
+                    </tr>
+                    <tr>
+                        <td>div>p</td>
+                        <td>直下のp</td>
+                        <td>soup.select("div>p")</td>
+                        <td>divタグ直下のpタグのみを取得する。</td>
+                    </tr>
+                    <tr>
+                        <td>div p</td>
+                        <td>子孫のp</td>
+                        <td>soup.select("div p")</td>
+                        <td>divタグ配下の全pタグを取得する。</td>
+                    </tr>
+                    <tr>
+                        <td>tr:nth-child(2)</td>
+                        <td>2番目のtr</td>
+                        <td>soup.select("tr:nth-child(2)")</td>
+                        <td>親要素内での2番目のtrを取得する。</td>
+                    </tr>
+                    <tr>
+                        <td>[data-id="123"]</td>
+                        <td>属性指定</td>
+                        <td>soup.select([data-id="123"])</td>
+                        <td>data-id="123"を持つ要素を取得する。</td>
+                    </tr>
+
+                </table>
+            </div>
+        </main>
+</body>
+<footer>
+
+</footer>
+</html>

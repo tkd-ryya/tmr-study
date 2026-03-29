@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+        <h3>【seaborn】</h3>
+            <ol>
+                <li>seabornのスタイルを設定する。</li>
+                    <p>sns.set_theme(style="whitegrid",font="meiryo",palette="Set2")</p><br>
+                
+                <li>データのカテゴリの順序を明示的に指定する。</li>
+                    <p>import pandas as pd</p>
+                    <p>order = ["設備1","設備2","設備3"]</p>
+                    <p>df["設備"] = pd.Categorical(df["設備"] , categories = order , ordered =True)</p>
+                    <p>sns.lineplot(data=df , x="date" , y="value" , hue ="設備")</p>
+                <li>データのカテゴリの順序を明示的に指定する。</li>
+
+            </ol>
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>

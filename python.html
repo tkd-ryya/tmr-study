@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+        <ol>
+            <li><a href="python_data_analysis.html">データ分析</a></li>
+            <li><a href="python_seaborn.html">seaborn</a></li>
+            <li><a href="python_scraping.html">スクレイピング</a></li>
+            <li><a href="python_others.html">その他</a>
+        </ol>
+
+        <h3>【基本文法】</h3>
+            <ol>
+                <li>「**」:べき乗  (例：2<strong>**</strong>3 → 8(=2^3))</li>
+                <li>「//」:除算(余りを捨てる) (例：7<strong>//</strong>3 → 2(=<strong>2</strong>*3+1))</li>
+                <li>「%」:余剰(余りを取得) (例:7<strong>%</strong>3 → 1(=2*3+<strong>>1</strong>))</li><br>
+                <li>「"r"」:読み取りモード</li>
+                <li>「"w"」:新規書き込みモード（既に中身があれば全部消えて上書きされるので注意▲!）</li>
+                <li>「"a」：追記モード（ファイルがなければ作成、既存の内容は消えない）</li><br>
+                <li>数字を文字列にする。：str(num)</li>
+                <li>文字列を数字にする。：int(str)</li>
+
+            </ol>
+
+        <h3>【面内分布の解析】</h3>
+            <ol>
+                <li>規格値以上、以下をカウントする。</li>
+                <p>UpperNgCount = (df["Sensitivity"] >= 1).sum()</p>
+                <p>LowerNgCount = (df["Sensitivity"] <= -1).sum()</p>
+            </ol>
+
+            
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>

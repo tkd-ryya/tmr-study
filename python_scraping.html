@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+        <h3>【BeautifulSoup】</h3>
+            <ol>
+                <li>スクレイピングの基本の流れ</li>
+                    <p>(1)RequestsでHTMLを取得する。</p>
+                    <p>(2)取得したHTMLを解析する。（BeautifulSoup）</p>
+                    <p>(3)自分が欲しい情報を取得する。</p>
+                <li>文法</li>
+                    <ul>
+                        <li>タグを取得するとき：soup.find()</li>
+                        <li>すべてのタグを取得するとき：soup.find_all() ➡ リストで取得されるので、soup.find_all("h2")[0]などの形で取得できる。</li>
+                        <li>テキストを取得するとき：soup.fond().text</li>
+                    </ul>
+                <li>コード例_01（基本形）</li>
+                    <p>from bs4 impor BeautifulSoup</p>
+                    <p>import request</p>
+                    <p>url="https://www.python.org/"
+                    <p>res = requests.get(url)</p><br>
+                    <p>if res.status.code==200:</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;soup = BeautifulSoup(res.text)</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;print(soup.find(h2).text)</p>
+                    <p>else:</p>
+                    <P>&ensp;&ensp;&ensp;&ensp;raise</P>
+                    <p>&ensp;&ensp;&ensp;&ensp;print("アクセスに失敗しました。")</p>
+                <li>コード例_02（h2タグの中身をすべて取出したいとき）</li>
+                    <p>for i,h2_tag in enumerate(soup.find_all("h2")):</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;print(i,h2_tag.text)
+                <li>コード例_03（find_all()で取得したh2からテキストだけ取得して、h2_text_listに格納したいとき）</li>
+                    <p>h2_text_list=[]</p>
+                    <p>for i,h2_tag in enumerate(soup.find_all("h2")):</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;h2_text_list.append(h2_tag.text)</p>
+                <li>コード例_04（xxxクラスとyyyクラスを持つspanタグをすべて取得する。）</li>
+                    <p>soup.find_all("span",class_=["xxx","yyy"])</p>
+            </ol>
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>

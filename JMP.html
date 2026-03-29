@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="home.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+        <div class="sidebar">
+            <ol>
+                <p><a href="#nav">TOP</a></p>
+                <li><a href="#実験計画法">実験計画法（DOE）</a></li>
+                <li><a href="#磁性体の種類">磁性体の種類</a></li>
+                <li><a href="#ヒステリシス損">ヒステリシス損</a></li>
+                <li><a href="#RIE">RIE</a></li>
+
+            </ol>
+        </div>
+        <div class="main_frame">
+            <ol>
+                <h3 id="実験計画法">実験計画法（DOE）</h3>
+                    <ul>
+                        <li>実験計画法の主な手順</li>
+                            <img src="images/実験計画法_主な手順.png" alt=""><br><br>
+                        <li>因子を整理する。</li>
+                            <img src="images/実験計画法_因子の整理.png" alt="" height="300px"><br><br>
+                        <li>「実験計画(DOE)」 >>> 「カスタム計画」</li>
+                            <img src="images/実験計画法_カスタム計画.png" alt="" height="600px"><br><br>
+                        <li>交互作用を設定したい場合は、「モデル」で「交互作用」 >>> 「2次」を選択する。</li>
+                            <img src="images/実験計画法_交互作用の設定.png" alt="" height="200px" ><br><br>
+                            <p>実験の回数は「デフォルト値」が推奨。「計画の作成」をクリックする。</p><br>
+                        <li>計画を作成すると、最適な実験計画を提示してくれる。</li>
+                            <img src="images/実験計画法_最適な実験計画.png" alt="" height="300px">
+                            <img src="images/実験計画法_出力オプション.png" alt="" height="300px">
+                            <p>「テーブルの作成」を押すと。テーブルを作成してくれる。</p><br>
+                        <li>実験計画に基づいて、実験を行い、応答を記入する。</li>
+                            <P>テーブルの左上の「▲モデル」のスクリプトをクリックすると、「モデルの指定」の画面に進む。</P>
+                            <img src="images/実験計画法_モデルの指定.png" alt="" height="400px">
+                            <p>「実行」ボタンを押す。</p><br>
+                        <li>応答の分析画面に進む。</li>
+                            <img src="images/実験計画法_効果の要約.png" alt="" height="300px">
+                            <p>「効果の要約」でp値が低く、効果があると認めがたい因子を削除していく。（誤差へのプーリング）</p>
+                    </ul>
+                    
+                    
+                <li>GlobalAddressを用いて、データを結合する場合</li>
+                    <p>テーブル(T) ➡ 結合(join) ➡ 対応する列「対応」にGrobalAddressを選択する。</p>
+                <li>再コード化</li>
+                    <p>列(c) ➡ 再コード化 ➡ 合体させたい列を選択 ➡ 右クリック？ ➡ 1にグループ化 ➡ 新しいラベル名「RH-8T,RH-9T」 ➡ 再コード化をクリック</p>
+                <li>連続変数をカテゴリ化する</li>
+                    <P>列 ➡ ユーティリティ ➡ カテゴリ化の計算式の作成 ➡ いくつかの列を選択し、「-」を押して、必要なカテゴリ数にする（例えば0.5以上と0.5未満に分ける。3つに分けて規格値下限NG、規格値内、規格値上限NGに分けることが多そう。） ➡ </P>
+                <li>データの書き出し</li>
+                    <p>ファイル ➡ 書き出し ➡ イメージやhtmlなどに書きだし可能</p>
+                <li>グラフの書き出し
+                    <p>選択ツール ➡ タイトル部をクリック ➡ 右クリックして、コピー ➡ エクセルなどに貼り付け</p>
+            </ol>
+        </div>
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>
