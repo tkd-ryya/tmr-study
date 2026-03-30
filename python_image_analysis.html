@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav" id="nav">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+        <div class="sidebar">
+            <p><a href="#nav">TOP</a></p>
+            <ol>
+                <li><a href="#datetime">日付を datetime に変換する。</a></li>
+            </ol>
+        </div>
+
+        <div class="main_frame">
+            <h3>基本的な流れ</h3>
+                <ol>処理フロー</ol>
+                    <li>画像読込</li>
+                        <p>import cv2</p>
+                        <p>import matplotlib.pyplot as plt</p>
+                        <p>image_url = r"C:/user/...省略/CDS.png"</p>
+                        <p>img = cv2.imread(image_url,0) #グレースケールに変換</p><br>
+                    <li>ノイズ除去</li>
+                        <p>blur = cv2.bilateralFilter(img,9,75,75)</p>
+                        <p># 基本形 blur = cv2.bilateralFilter(src , d, sigmaColor , sigmaSpace)</p>
+                        <p># d:フィルタのサイズ(周囲何ピクセルを見るか)</p>
+                        <p># sigmaColor:どれぐらいの色の違いを許すか、数字が大きい(違っても平均する)：ぼやける、数字が小さい(少し違うと別扱い)：エッジを強く保持</p>
+                        <p># sigmaSpace:どれぐらい遠くまで影響させるか、数字が大きい：広い範囲で平滑化、数字が小さい：近いピクセルだけが影響</p><br>
+                    <li>二値化</li>
+                        <p>_ , thresh = cv2.threshold(blur, 0 ,255 ,cv2.THRESH_OTSU)</p><br>
+                    <li>画像確認</li>
+                        <p>img_color = cv2.cvtColor(blur, cv2.COLOR_GRAY2BGR)</p>
+                        <p>cv2.drawContours(img_color, contours, -1, (0,255,0), 1)</p>
+                        <p>plt.imshow(img_color)</p>
+                        <p>plt.title("Contours")</p>s
+                        <p>plt.axis('off')</p>
+                        <p>plt.show()</p>
+                    <li>輪郭抽出</li>
+                        <p>contour , _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL , cv2.CHAIN_APPROX_SIMPLE)</p><br>
+                    <li>面積の計算</li>
+                        <p>area = cv2.contourAres(contour)</p>
+                        <p>if area < 50:</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;continue</p><br>
+                    <li>画像の確認</li>
+                        <p>plt.figure(figsize=(10,5))</p>
+                        <p>plt.subplot(1,2,1)</p>
+                        <p>plt.title("Original")</p>
+                        <p>plt.imshow(blur , cmap="gray")</p>
+                        <p>plt.axis("off")</p><br>
+                        
+                        <p>plt.subplot(1,2,1)</p>
+                        <p>plt.title("Threshold")</p>
+                        <p>plt.imshow(thresh , cmap="gray")</p>
+                        <p>plt.axis("off")</p>
+                        <p>plt.show()</p>
+
+plt.subplot(1,2,2)
+plt.title("Threshold")
+plt.imshow(thresh, cmap='gray')
+plt.axis('off')
+
+plt.show()
+        </div>
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>
