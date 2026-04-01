@@ -72,7 +72,18 @@
                                 <p>左のグラフ：各成分の固有値</p>
                                 <p>中央のグラフ：第１成分、第２成分のスコアプロット</p>
                                 <p>右のグラフ：負荷量プロット</p>
-                                <p>赤三角からバイプロットを表示させると、lotと検査項目や品名と検査項目を同時に解釈することができる。</p>
+                                <p>赤三角からバイプロットを表示させると、lotと検査項目や品名と検査項目を同時に解釈することができる。</p><br>
+                                
+                                <p>正規化（前処理）</p>
+                                <p>&ensp;&ensp;&ensp;&ensp;方法1.&ensp;&ensp;各項目ごとにZスコア&ensp;:&ensp;z&ensp;=&ensp;(𝑥−平均)&ensp;/&ensp;標準偏差</p>
+                                <p>&ensp;&ensp;&ensp;&ensp;方法2.&ensp;&ensp;規格基準&ensp;:&ensp;x′&ensp;=&ensp;x−ターゲット&ensp;/&ensp;規格幅</p><br>
+
+                                <p>フェーズ1</p>
+                                <p>&ensp;&ensp;&ensp;&ensp;製品 × 平均・σでPCA</p>
+                                <P>フェーズ2</P>
+                                <P>&ensp;&ensp;&ensp;&ensp;ウエハー単位でPCA</P>
+                                <P>フェーズ3</P>
+                                <P>&ensp;&ensp;&ensp;&ensp;座標パターンを入れる</P>
                         </ul>
                     </div><br>
 
