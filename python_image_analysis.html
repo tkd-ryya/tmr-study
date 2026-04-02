@@ -33,45 +33,72 @@
 
         <div class="main_frame">
             <h3>基本的な流れ</h3>
-                <ol>処理フロー</ol>
-                    <li>画像読込</li>
-                        <p>import cv2</p>
-                        <p>import matplotlib.pyplot as plt</p>
-                        <p>image_url = r"C:/user/...省略/CDS.png"</p>
-                        <p>img = cv2.imread(image_url,0) #グレースケールに変換</p><br>
-                    <li>ノイズ除去</li>
-                        <p>blur = cv2.bilateralFilter(img,9,75,75)</p>
-                        <p># 基本形 blur = cv2.bilateralFilter(src , d, sigmaColor , sigmaSpace)</p>
-                        <p># d:フィルタのサイズ(周囲何ピクセルを見るか)</p>
-                        <p># sigmaColor:どれぐらいの色の違いを許すか、数字が大きい(違っても平均する)：ぼやける、数字が小さい(少し違うと別扱い)：エッジを強く保持</p>
-                        <p># sigmaSpace:どれぐらい遠くまで影響させるか、数字が大きい：広い範囲で平滑化、数字が小さい：近いピクセルだけが影響</p><br>
-                    <li>二値化</li>
-                        <p>_ , thresh = cv2.threshold(blur, 0 ,255 ,cv2.THRESH_OTSU)</p><br>
-                    <li>画像確認</li>
-                        <p>img_color = cv2.cvtColor(blur, cv2.COLOR_GRAY2BGR)</p>
-                        <p>cv2.drawContours(img_color, contours, -1, (0,255,0), 1)</p>
-                        <p>plt.imshow(img_color)</p>
-                        <p>plt.title("Contours")</p>s
-                        <p>plt.axis('off')</p>
-                        <p>plt.show()</p>
-                    <li>輪郭抽出</li>
-                        <p>contour , _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL , cv2.CHAIN_APPROX_SIMPLE)</p><br>
-                    <li>面積の計算</li>
-                        <p>area = cv2.contourAres(contour)</p>
-                        <p>if area < 50:</p>
-                        <p>&ensp;&ensp;&ensp;&ensp;continue</p><br>
-                    <li>画像の確認</li>
-                        <p>plt.figure(figsize=(10,5))</p>
-                        <p>plt.subplot(1,2,1)</p>
-                        <p>plt.title("Original")</p>
-                        <p>plt.imshow(blur , cmap="gray")</p>
-                        <p>plt.axis("off")</p><br>
+                <p>画像データを3次元のndarrayの配列データとして扱う。</p>
+                <p>通常：「RGB」、OpenCV：「BGR」</p>
+                    <ul>
+                        <p>基本文法</p>
+                            <li>print(img.shape) &ensp;&ensp;&ensp;&ensp;#例:(884,1200,3) 縦884pixel,横1200pixel,カラーの３次元配列</li>
+                            <li>plt.imshow(img) &ensp;&ensp;&ensp;&ensp;#画像が表示されるが、BGR配列なので、色がおかしい。</li>
+                            <li>img_rgb = cv2.cvtColor(img , cv2.COLOR_BGR2RGB)&ensp;&ensp;&ensp;&ensp;#これでBGR配列からRGB配列に変えられる。</li>
+                            <li>cv2.imwrite("./output.png",img) &ensp;&ensp;&ensp;&ensp;#画像のファイル出力。第一引数は出力先のファイルパス、第二引数に書きだしたい画像のndarrayを指定する。</li>
+                            <li>画像サイズを変更する。元の画像のサイズを取得し、比で変更する。</li>
+                                <p>h = round(img.shape[0]/2)&ensp;&ensp;&ensp;&ensp; #縦のピクセル数</p>
+                                <p>w = round(img.shape[1]/2)&ensp;&ensp;&ensp;&ensp; #横のピクセル数</p>
+                                <p>resize_img = cv2.resize(img,(h,w))</p>
+                                <p>plt.imshow(cv2.cvtColor(resize_img, cv2.COLOR_BGR2RGB))</p>
+                            <li>トリミング</li>
+                                <p>trim_img = img[0:120,0:500]</p>
+                                <p>plt.imshow(cv2.cvtColor(trim_img,cv2.COLOR_BGR2RGB))</p>
+                            <li>グレーカラーに変換</li>
+                                <p>gray_img = cv2.cvtColor(img,cv2.COLOR_RGB2GAY)</p>
+                                <p>plt.imshow(cv2.cvtColor(gray_img,cv2.COLOR_BGR2RGB))</p>
+                    </ul><br><br>
+                
+                <p>処理フロー</p>
+                    <ol>
+                        <li>画像読込</li>
+                            <p>import cv2</p>
+                            <p>import matplotlib.pyplot as plt</p>
+                            <p>image_url = r"C:/user/...省略/CDS.png"</p>
+                            <p>img = cv2.imread(image_url,0) #グレースケールに変換</p>
+                            
+                            
+                                <br>
+                        <li>ノイズ除去</li>
+                            <p>blur = cv2.bilateralFilter(img,9,75,75)</p>
+                            <p># 基本形 blur = cv2.bilateralFilter(src , d, sigmaColor , sigmaSpace)</p>
+                            <p># d:フィルタのサイズ(周囲何ピクセルを見るか)</p>
+                            <p># sigmaColor:どれぐらいの色の違いを許すか、数字が大きい(違っても平均する)：ぼやける、数字が小さい(少し違うと別扱い)：エッジを強く保持</p>
+                            <p># sigmaSpace:どれぐらい遠くまで影響させるか、数字が大きい：広い範囲で平滑化、数字が小さい：近いピクセルだけが影響</p><br>
+                        <li>二値化</li>
+                            <p>_ , thresh = cv2.threshold(blur, 0 ,255 ,cv2.THRESH_OTSU)</p><br>
+                        <li>画像確認</li>
+                            <p>img_color = cv2.cvtColor(blur, cv2.COLOR_GRAY2BGR)</p>
+                            <p>cv2.drawContours(img_color, contours, -1, (0,255,0), 1)</p>
+                            <p>plt.imshow(img_color)</p>
+                            <p>plt.title("Contours")</p>s
+                            <p>plt.axis('off')</p>
+                            <p>plt.show()</p>
+                        <li>輪郭抽出</li>
+                            <p>contour , _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL , cv2.CHAIN_APPROX_SIMPLE)</p><br>
+                        <li>面積の計算</li>
+                            <p>area = cv2.contourAres(contour)</p>
+                            <p>if area < 50:</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;continue</p><br>
+                        <li>画像の確認</li>
+                            <p>plt.figure(figsize=(10,5))</p>
+                            <p>plt.subplot(1,2,1)</p>
+                            <p>plt.title("Original")</p>
+                            <p>plt.imshow(blur , cmap="gray")</p>
+                            <p>plt.axis("off")</p><br>
+                            
+                            <p>plt.subplot(1,2,1)</p>
+                            <p>plt.title("Threshold")</p>
+                            <p>plt.imshow(thresh , cmap="gray")</p>
+                            <p>plt.axis("off")</p>
+                            <p>plt.show()</p>
+                    </ol>
                         
-                        <p>plt.subplot(1,2,1)</p>
-                        <p>plt.title("Threshold")</p>
-                        <p>plt.imshow(thresh , cmap="gray")</p>
-                        <p>plt.axis("off")</p>
-                        <p>plt.show()</p>
 
 plt.subplot(1,2,2)
 plt.title("Threshold")
