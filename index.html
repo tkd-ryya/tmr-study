@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>home</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
 <body>
     <header>
@@ -24,7 +26,28 @@
 
     </header>
     <main>
-        <!-- <p>これはソースコードのです。</p> -->
+        <div class="sidebar">
+            <p><a href="#nav">TOP</a></p>
+            <p><a href="python.html">戻る</a></p><br>            
+        </div>                
+        <div class="main_frame">
+            <p>今日は、<strong><span id="today"></span></strong>です。</p>
+            <script>
+            // 今日の日付を取得
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1; // 月は0から始まるため+1
+            const date = now.getDate();
+            
+            // 曜日を取得（オプション）
+            const dayOfWeek = ["日", "月", "火", "水", "木", "金", "土"][now.getDay()];
+
+            // 画面に表示
+            document.getElementById('today').innerHTML = 
+                `${year}年${month}月${date}日 (${dayOfWeek})`;
+            </script><br>
+        </div>
+        
     </main>
 </body>
 <footer>

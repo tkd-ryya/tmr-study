@@ -26,86 +26,231 @@
     <main>
         <div class="sidebar">
             <p><a href="#nav">TOP</a></p>
+            <p><a href="python.html">戻る</a></p><br>
             <ol>
-                <li><a href="#datetime">日付を datetime に変換する。</a></li>
+                <li><a href="#基本文法">基本文法</a></li><br>
+                <li><a href="#SEM画像の断面積測定">SEM画像の断面積測定</a></li><br>
+                <li><a href="#xxxxx">xxxxx</a></li>
             </ol>
         </div>
 
         <div class="main_frame">
-            <h3>基本的な流れ</h3>
+            <h3 id="基本文法">基本文法</h3>
                 <p>画像データを3次元のndarrayの配列データとして扱う。</p>
                 <p>通常：「RGB」、OpenCV：「BGR」</p>
                     <ul>
-                        <p>基本文法</p>
-                            <li>print(img.shape) &ensp;&ensp;&ensp;&ensp;#例:(884,1200,3) 縦884pixel,横1200pixel,カラーの３次元配列</li>
-                            <li>plt.imshow(img) &ensp;&ensp;&ensp;&ensp;#画像が表示されるが、BGR配列なので、色がおかしい。</li>
-                            <li>img_rgb = cv2.cvtColor(img , cv2.COLOR_BGR2RGB)&ensp;&ensp;&ensp;&ensp;#これでBGR配列からRGB配列に変えられる。</li>
-                            <li>cv2.imwrite("./output.png",img) &ensp;&ensp;&ensp;&ensp;#画像のファイル出力。第一引数は出力先のファイルパス、第二引数に書きだしたい画像のndarrayを指定する。</li>
-                            <li>画像サイズを変更する。元の画像のサイズを取得し、比で変更する。</li>
-                                <p>h = round(img.shape[0]/2)&ensp;&ensp;&ensp;&ensp; #縦のピクセル数</p>
-                                <p>w = round(img.shape[1]/2)&ensp;&ensp;&ensp;&ensp; #横のピクセル数</p>
-                                <p>resize_img = cv2.resize(img,(h,w))</p>
-                                <p>plt.imshow(cv2.cvtColor(resize_img, cv2.COLOR_BGR2RGB))</p>
-                            <li>トリミング</li>
-                                <p>trim_img = img[0:120,0:500]</p>
-                                <p>plt.imshow(cv2.cvtColor(trim_img,cv2.COLOR_BGR2RGB))</p>
-                            <li>グレーカラーに変換</li>
-                                <p>gray_img = cv2.cvtColor(img,cv2.COLOR_RGB2GAY)</p>
-                                <p>plt.imshow(cv2.cvtColor(gray_img,cv2.COLOR_BGR2RGB))</p>
-                    </ul><br><br>
-                
-                <p>処理フロー</p>
-                    <ol>
-                        <li>画像読込</li>
+                        <li><span style="color:purple">ライブラリの読み込み</span></li>
                             <p>import cv2</p>
                             <p>import matplotlib.pyplot as plt</p>
-                            <p>image_url = r"C:/user/...省略/CDS.png"</p>
-                            <p>img = cv2.imread(image_url,0) #グレースケールに変換</p>
-                            
-                            
-                                <br>
-                        <li>ノイズ除去</li>
-                            <p>blur = cv2.bilateralFilter(img,9,75,75)</p>
-                            <p># 基本形 blur = cv2.bilateralFilter(src , d, sigmaColor , sigmaSpace)</p>
-                            <p># d:フィルタのサイズ(周囲何ピクセルを見るか)</p>
-                            <p># sigmaColor:どれぐらいの色の違いを許すか、数字が大きい(違っても平均する)：ぼやける、数字が小さい(少し違うと別扱い)：エッジを強く保持</p>
-                            <p># sigmaSpace:どれぐらい遠くまで影響させるか、数字が大きい：広い範囲で平滑化、数字が小さい：近いピクセルだけが影響</p><br>
-                        <li>二値化</li>
-                            <p>_ , thresh = cv2.threshold(blur, 0 ,255 ,cv2.THRESH_OTSU)</p><br>
-                        <li>画像確認</li>
-                            <p>img_color = cv2.cvtColor(blur, cv2.COLOR_GRAY2BGR)</p>
-                            <p>cv2.drawContours(img_color, contours, -1, (0,255,0), 1)</p>
-                            <p>plt.imshow(img_color)</p>
-                            <p>plt.title("Contours")</p>s
-                            <p>plt.axis('off')</p>
-                            <p>plt.show()</p>
-                        <li>輪郭抽出</li>
-                            <p>contour , _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL , cv2.CHAIN_APPROX_SIMPLE)</p><br>
-                        <li>面積の計算</li>
-                            <p>area = cv2.contourAres(contour)</p>
-                            <p>if area < 50:</p>
-                            <p>&ensp;&ensp;&ensp;&ensp;continue</p><br>
-                        <li>画像の確認</li>
-                            <p>plt.figure(figsize=(10,5))</p>
-                            <p>plt.subplot(1,2,1)</p>
-                            <p>plt.title("Original")</p>
-                            <p>plt.imshow(blur , cmap="gray")</p>
-                            <p>plt.axis("off")</p><br>
-                            
-                            <p>plt.subplot(1,2,1)</p>
-                            <p>plt.title("Threshold")</p>
-                            <p>plt.imshow(thresh , cmap="gray")</p>
-                            <p>plt.axis("off")</p>
-                            <p>plt.show()</p>
-                    </ol>
-                        
+                            <p>import numpy as np</p>
+                            <p>from PIL import Image</p><br>
+                        <li><span style="color:purple">画像ファイルの読み込み</span></li>
+                            <p>path = r"C:\Users\taked\Desktop\ryo_勉強関連\05_python\21_画像解析\タイヤ_original_01.png"</p>
+                            <p>pil_img = Image.open(path)&ensp;&ensp;&ensp;&ensp;#Pillowで画像を開く</p>
+                            <p>img = np.array(pil_img)&ensp;&ensp;&ensp;&ensp;#PillowからNumpyに変換</p>
+                            <p>img = cv2.cvtColor(img,cv2.COLOR_RGB2BGR)&ensp;&ensp;&ensp;&ensp;#RGBからBGRへ変換する。</p><br>
+                        <li><span style="color:purple">ピクセル数の確認</span></li>
+                            <p>print(img.shape) &ensp;&ensp;&ensp;&ensp;#例:(884,1200,3) 縦884pixel,横1200pixel,カラーの３次元配列</p><br>
+                        <li><span style="color:purple">画像をグレースケールにして、2値化する。</span></li>
+                            <p>img_gray = cv2.cvtColor(img , cv2.COLOR_BGR2GRAY)</p>
+                            <p>_ , binary = cv2.threshold(img_gray , 127 , 255 , cv2.THRESH_BINARY)</p><br>
+                        <li><span style="color:purple">画像の表示</span></li>
+                            <p>cv2.imshow("Image",img)&ensp;&ensp;&ensp;&ensp;#第一引数はタイトル、第二引数は画像データ(numpy)</p>
+                            <p>cv2.waitKey(0)&ensp;&ensp;&ensp;&ensp;</p><br>
+                        <li><span style="color:purple">画像のファイル出力。</span></li>
+                            <p>cv2.imwrite("./output.png",img) &ensp;&ensp;&ensp;&ensp;#第一引数は出力先のファイルパス、第二引数に書きだしたい画像のndarrayを指定する。</p><br>
+                        <li><span style="color:purple">画像サイズを変更する。元の画像のサイズを取得し、比で変更する。</span></li>
+                            <p>h = round(img.shape[0]/2)&ensp;&ensp;&ensp;&ensp; #縦のピクセル数</p>
+                            <p>w = round(img.shape[1]/2)&ensp;&ensp;&ensp;&ensp; #横のピクセル数</p>
+                            <p>resize_img = cv2.resize(img,(h,w))</p>
+                            <p>plt.imshow(cv2.cvtColor(resize_img, cv2.COLOR_BGR2RGB))</p><br>
+                        <li><span style="color:purple">トリミング</span></li>
+                            <p>trim_img = img[0:120,0:500]</p>
+                            <p>plt.imshow(cv2.cvtColor(trim_img,cv2.COLOR_BGR2RGB))</p><br>
+                        <li><span style="color:purple">グレーカラーに変換</span></li>
+                            <p>gray_img = cv2.cvtColor(img,cv2.COLOR_RGB2GRAY)</p>
+                            <p>plt.imshow(cv2.cvtColor(gray_img,cv2.COLOR_BGR2RGB))</p><br>
+                    </ul><br><br>
+            <h3 id="SEM画像の断面積測定">SEM画像の断面積測定</h3>
+                <p>original画像（これを処理していく）</p>
+                        <img src="images/画像分析_半導体_original.jpg" alt="" width="600px">
+                    <ol>
+                        <li><span style="color:purple">ライブラリ読み込み</span></li>
+                            <p>import cv2</p>
+                            <p>import matplotlib.pyplot as plt</p>
+                            <p>import numpy as np</p>
+                            <p>from PIL import Image</p><br>
+                        <li><span style="color:purple">画像の読み込み</span></li>
+                            <p>画像を読み込む。cv2.imreadは日本語パス非対応なので、Pillowで読み込んで、numpyでndarray配列に変えて読み込む。</p>
+                            <p>path = r"C:\Users\taked\Desktop\ryo_勉強関連\05_python\21_画像解析\半導体.jpg"</p>
+                            <p>pil_img = Image.open(path).convert("L") &ensp;#「.convert("L")」でグレースケール化している。</p>
+                            <p>img = np.array(pil_img)</p>
+                            <img src="images/画像分析_半導体_01_グレースケール.png" alt="" width="600px"><br><br>
+                        <li><span style="color:purple">トリミング</span></li>
+                            <p>画像の測定対象物付近（上下45~60%の範囲）だけにする。</p>
+                            <p>h,w = img.shape</p>
+                            <p>top = 45</p>
+                            <p>bottom = 60</p>
+                            <p>img_resize = img[round(h/100*top):round(h/100*bottom),0:w]</p>
+                            <p>img_color = cv2.cvtColor(img , cv2.COLOR_GRAY2BGR)[round(h/100*top):round(h/100*bottom),0:w]&ensp;#最後の可視化で使うので、カラー画像もトリミングしておく。</p>
+                            <img src="images/画像分析_半導体_02_trim.png" alt="" width="600px"><br><br>
+                        <li><span style="color:purple">ノイズ除去</span></li>
+                            <p>ノイズを除去する。blurは「ぼかし」という意味の英単語。</p>
+                            <p>blur = cv2.GaussianBlur(img, (9,9),0)</p>
+                            <img src="images/画像分析_半導体_03_ノイズ除去.png" alt="" width="600px"> 
+                            <table class="table_tag">
+                                <tr>
+                                    <th>引数</th>
+                                    <th>意味</th>
+                                    <th>調整範囲</th>
+                                </tr>
+                                <tr>
+                                    <td>第二引数</td>
+                                    <td>カーネルサイズ</td>
+                                    <td>(3,3)~(11,11)</td>
+                                </tr>
+                                <tr>
+                                    <td>第三引数</td>
+                                    <td>自動sigma</td>
+                                    <td>通常0でOK</td>
+                                </tr>
+                            </table><br><br>
 
-plt.subplot(1,2,2)
-plt.title("Threshold")
-plt.imshow(thresh, cmap='gray')
-plt.axis('off')
+                        <li><span style="color:purple">二値化(Otsu)</span></li>
+                            <p>白と黒に分離する。</p>
+                            <p>_ , thresh = cv2.threshold(blur , 0 , 255 , cv2.THRESH_BINARY + cv2.THRESH_OTSU)</p>
+                            <img src="images/画像分析_半導体_04_二値化.png" alt="" width="600px">
+                            <p>もし白と黒を逆にしたい場合は、cv2.THRESH_BINARY<strong>_INV</strong>にする。</p><br>
+                        <li><span style="color:purple">モルフォロジー処理</span></li>
+                            <p>小さな穴やノイズを埋める</p>
+                            <p>kernel = np.ones((5,5),np.uint8)</p>
+                            <p>clean = cv2.morphologyEx(thresh,cv2.MORPH_CLOSE,kernel)</p>
+                            <img src="images/画像分析_半導体_05_モルフォロジー処理.png" alt="" width="600px">
+                            <table class="table_tag">
+                                <tr>
+                                    <th>引数</th>
+                                    <th>意味</th>
+                                    <th>調整範囲</th>
+                                </tr>
+                                <tr>
+                                    <td>(5,5)</td>
+                                    <td>処理サイズ</td>
+                                    <td>(3,3):軽め補正、(5,5):穴埋め強い、(7,7):形崩れる可能性あり</td>
+                                </tr>
+                                <tr>
+                                    <td>MORPH_CLOSE</td>
+                                    <td>膨張 →収縮</td>
+                                    <td>通常0でOK</td>
+                                </tr>
+                            </table><br><br>
+                        <li><span style="color:purple">輪郭抽出</span></li>
+                            <p>contours , _ =cv2.findContours(clean,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)</p>
+                            <table class="table_tag">
+                                <tr>
+                                    <th>引数</th>
+                                    <th>意味</th>
+                                    <th>調整範囲</th>
+                                </tr>
+                                <tr>
+                                    <td>第二引数</td>
+                                    <td>RETR_EXTERNAL</td>
+                                    <td>外側だけ取得</td>
+                                </tr>
+                                <tr>
+                                    <td>第三引数</td>
+                                    <td>CHAIN_APPROX_SIMPLE</td>
+                                    <td>点を圧縮</td>
+                                </tr>
+                            </table><br><br>
+                        <li><span style="color:purple">可視化（確認）</span></li>
+                            <p># 面積テキストをカラーイメージと輪郭(contours)を重ねる。</p>
+                            <p>for i , cnt , in enumerate(contours):</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;area = cv2.contourArea(cnt) <span style="color:blue">&ensp;&ensp;&ensp;&ensp;#輪郭の面積を計算する。</span></p>
+                            <p>&ensp;&ensp;&ensp;&ensp;if area < 500: <span style="color:blue">&ensp;&ensp;&ensp;&ensp;#輪郭の面積が小さい部分を除外する。</span></p>
+                            <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;continue</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;cv2.drawContours( img_color , [cnt] , -1 , (0 , 255 , 0) , 1 ) <span style="color:blue">&ensp;&ensp;&ensp;&ensp;#img_color上に、輪郭([cnt])を描画する。</span></p>
+                            <table class="table_tag">
+                                <tr>
+                                    <th>引数</th>
+                                    <th>入力例</th>
+                                    <th>説明</th>
+                                </tr>
+                                <tr>
+                                    <td>第3引数(描画する輪郭のインデックス。)</td>
+                                    <td>-1</td>
+                                    <td>-1を指定すると、リストに含まれるすべての輪郭を描画する。基本-1でよい。</td>
+                                </tr>
+                                <tr>
+                                    <td>第4引数（輪郭のBGR）</td>
+                                    <td>(0,255,0)</td>
+                                    <td>Blue=0,Green=255,Red=0</td>
+                                </tr>
+                                <tr>
+                                    <td>第5引数(輪郭の太さ)</td>
+                                    <td>1</td>
+                                    <td>輪郭線の太さ(ピクセル)。-1にすると内部を塗りつぶす。</td>
+                                </tr>
+                            </table>
+                            <p>&ensp;&ensp;&ensp;&ensp;<span style="color:blue"># 重心計算（表示位置）</span></p>
+                            <p>&ensp;&ensp;&ensp;&ensp;M = cv2.moments(cnt)</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;if M["m00"] != 0:</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;cx = int(M["m10"] / M["m00"])</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;cy = int(M["m01"] / M["m00"])</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;else:</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;continue</p>
 
-plt.show()
+                            <p>&ensp;&ensp;&ensp;&ensp;<spna style="color:blue"># 面積テキスト描画</spna></p>
+                            <p>&ensp;&ensp;&ensp;&ensp;text = f"{int(area)} px"</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;cv2.putText(①img_color , ②text , ③(cx - 30, cy + 5 ), ④cv2.FONT_HERSHEY_SIMPLEX, ⑤0.5 , ⑥(0 , 0 , 255 ) , ⑦1 , ⑧cv2.LINE_AA)</p>
+                            <table class="table_tag">
+                                <tr>
+                                    <th>引数</th>
+                                    <th>入力例</th>
+                                    <th>説明</th>
+                                </tr>
+                                <tr>
+                                    <td>第3引数：描画する輪郭のインデックス</td>
+                                    <td>(cx -30 , cy + 5 )</td>
+                                    <td>テキストの左下の座標(x,y)</td>
+                                </tr>
+                                <tr>
+                                    <td>第4引数：文字の書体（フォントタイプ）</td>
+                                    <td>cv2.FONT_HERSHEY_SIMPLEX</td>
+                                    <td>この設定は標準的なサンセリフ体</td>
+                                </tr>
+                                <tr>
+                                    <td>第5引数：フォントサイズ</td>
+                                    <td>0.5</td>
+                                    <td>フォントの大きさ</td>
+                                </tr>
+                                <tr>
+                                    <td>第6引数：輪郭のBGR</td>
+                                    <td>(0,255,0)</td>
+                                    <td>Blue=0,Green=255,Red=0</td>
+                                </tr>
+                                <tr>
+                                    <td>第7引数：太さ</td>
+                                    <td>1</td>
+                                    <td>文字の線の太さ</td>
+                                </tr>
+                                <tr>
+                                    <td>第8引数：線種</td>
+                                    <td>cv2.LINE_AA</td>
+                                    <td>アンチエイリアス（Anti-Aliased）線種。文字の輪郭が滑らかになり、綺麗に表示される。</td>
+                                </tr>
+                            </table><br>
+                            <img src="images/画像分析_半導体_06_可視化（確認）.png" alt="" width="600px"><br><br>
+                        <li><span style="color:purple">画像を保存する。</span></li>
+                            <p>cv2.imshow("Contours",img_color)</p>
+                            <p>key = cv2.waitKey(0)</p>
+                            <p>if key==ord("s"): <span style="color:blue">&ensp;&ensp;&ensp;&ensp;#「s」のキーボードを押したときだけ、保存が実行される。</span></p> 
+                            <p>&ensp;&ensp;&ensp;&ensp;result , buf = cv2.imencode(".png",img_color)</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;buf.tofile(r"C:\Users\taked\Desktop\ryo_勉強関連\11_HTML_仕事関連\images\画像分析_半導体_06_可視化（確認）.png")</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;print("画像を保存しました。")</p>
+                            <p>cv2.destroyAllWindows()</p>
+                    </ol><br>
+
+                <h3 id="xxxxx">xxxxx</h3>
         </div>
     </main>
 </body>

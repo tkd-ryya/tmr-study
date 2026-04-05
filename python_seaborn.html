@@ -20,22 +20,28 @@
                 <li><a href="memo.html">memo</a></li>
             </ul>
         </nav>
-        
-
     </header>
-        <h3>【seaborn】</h3>
+    <main>
+        <div class="sidebar">
+            <p><a href="#nav">TOP</a></p>
+            <p><a href="python.html">戻る</a></p><br>
             <ol>
-                <li>seabornのスタイルを設定する。</li>
+                <li><a href="#スタイル設定">seabornのスタイル設定</a></li><br>
+                <li><a href="#グラフに表示するデータの順序">グラフに表示するデータの順序</a></li><br>
+            </ol>
+        </div>
+        <div class="main_frame">
+            <ol>                
+                <li id="スタイル設定">seabornのスタイルを設定する。</li>
                     <p>sns.set_theme(style="whitegrid",font="meiryo",palette="Set2")</p><br>
                 
-                <li>データのカテゴリの順序を明示的に指定する。</li>
+                <li id="グラフに表示するデータの順序">データのカテゴリの順序を明示的に指定する。</li>
                     <p>import pandas as pd</p>
                     <p>order = ["設備1","設備2","設備3"]</p>
                     <p>df["設備"] = pd.Categorical(df["設備"] , categories = order , ordered =True)</p>
-                    <p>sns.lineplot(data=df , x="date" , y="value" , hue ="設備")</p>
-                <li>データのカテゴリの順序を明示的に指定する。</li>
-
+                    <p>sns.lineplot(data=df , x="date" , y="value" , hue ="設備")</p><br>
             </ol>
+        </div>
     </main>
 </body>
 <footer>

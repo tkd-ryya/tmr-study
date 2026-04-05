@@ -27,13 +27,15 @@
             <p><a href="#nav">TOP</a></p>
 
             <ol>
-                <li>基本文法</li>
-                    <ul>               
-                        <a href="#基本文法">基本文法</a><br>
-                    </ul>
-                <li>スタイル関連</li>
+                <li>基本文法</li><br>
                     <ul>
-                        <li><a href="#画像の幅、高さ">画像の幅、高さ</a></li>
+                        <li><a href="#フォーマット">フォーマット</a></li><br>
+
+                    </ul><br>
+                <li>スタイル関連</li><br>
+                    <ul>
+                        <li><a href="#sidebar">サイドバーを作成する。</a></li><br>
+                        <li><a href="#画像の幅、高さ">画像の幅、高さ</a></li><br>
                         <li><a href="#idやクラスへのリンクの飛ばし方">idやクラスへのリンクの飛ばし方</a></li>
                     </ul>
                     
@@ -41,45 +43,106 @@
         </div>
         <div class="main_frame">
             <ul>
-                <div id="基本文法">
-                    <h2>基本文法</h2>
-                        <ol>フォーマット</ol>
-                            <p>[!DOCTYPE html]</p>
-                    <img src="images/html_format.png" alt="">
-                </div>
+                <div id="フォーマット">
+                    <h2>フォーマット</h2>                        
+                        <p>&lt;!DOCTYPE html&gt;</p>
+                        <p>&lt;html&gt;</p>
+                        <p>&lt;head&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;meta charset = "UTF-8"&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;title&gt;home&lt;/title&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;link rel="stylesheet" href="css/style.css"&gt;</p>
+                        <p>&lt;/head&gt;</p>
+                        <p>&lt;body&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;header&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&lt;nav class="nav"&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&lt;ul&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&lt;li&gt;&lt;a href="home.html"&gt;home&lt;/li&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&lt;li&gt;&lt;a href="TMR.html"&gt;TMR&lt;/li&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&lt;li&gt;&lt;a href="python.html"&gt;python&lt;/li&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&lt;/ul&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;/header&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;main&gt;</p><br>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;/main&gt;</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;footer&gt;</p><br>
+                        <p>&ensp;&ensp;&ensp;&ensp;&lt;/footer&gt;</p>
+                        <p>&lt;/body&gt;</p>
+                        <p>&lt;/html&gt;</p>
+                </div><br>        
+                <div id="sidebar">
+                    <h2>サイドバーの作り方</h2>
+                    <p>(HTML)</p>
+                    <p>&lt;div class="<strong>sidebar</strong>"&gt;</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&lt;p&gt;&lt;a href="#nav"&gt;TOP&lt;/a&gt;&lt;/p&gt;</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&lt;p&gt;&lt;a href="python.html"&gt;戻る&lt;/a&gt;&lt;/p&gt;</p><br>
+                    <p>&lt;div class="<strong>main_frame</strong>"&gt;&lt;/div&gt;</p><br>
+                    <p>(CSS)</p>
+                    <p><strong>.sidebar</strong>{position:fixed ; top:0 ; left:0 ; width:400px ; height:100vh ; background-color:#333 ; color:white ; padding:20px}</p>
+                    <p><strong>.main_frame</strong>{margin-left:420px ; padding:20px}</p>
+                </div><br>
+
+                <div id="画像の幅、高さ">
+                    <h2>画像の幅、高さ</h2>                    
+                    <p>alt=""の後に、例：width="1000px"やheight="500px"の属性を追加する。</p>
+                </div><br>
+
+                <div id="idやクラスへのリンクの飛ばし方">
+                    <h2>idやクラスへのリンクの飛ばし方</h2>
+                    <p>&lt;div id="xxx"&gt; のリンクに飛ぶ方法：&lt; a href = <strong>#</strong>xxx &gt; xxx &lt; a &gt;</p>
+                    <p>&lt;div class="xxx"&gt; のリンクに飛ぶ方法：&lt; a href = <strong>.</strong>xxx &gt; xxx &lt; a &gt;</p>
+                </div><br>
+
                 <div>
-                    <table class="tag">
+                    <h2>cssセレクタ</h2>
+                    <table class="table_tag">
                         <tr>
-                            <th>タグ</th>
+                            <th>書き方</th>
                             <th>意味</th>
+                            <th>スクレイピング方法</th>
+                            <th>説明</th>
                         </tr>
                         <tr>
-                            <td>p</td>
-                            <td>段落</td>
-                        </tr>
-                        <tr>
-                            <td>ol（オーダーリスト）</td>
-                            <td>番号付きリスト</td>
-                        </tr>
-                        <tr>
-                            <td>ulタグ（アンオーダーリスト）</td>
-                            <td>番号なしリスト</td>
-                        </tr>
-                        <tr>
+                            <td>div</td>
                             <td>divタグ</td>
-                            <td>特に意味を持たず、要素をグループ化する。</td>
+                            <td>soup.select("div")</td>
+                            <td>ページ内のすべてのdivタグを取得する。</td>
+                        </tr>
+                        <tr>
+                            <td>.class</td>
+                            <td>class指定</td>
+                            <td>soup.select(".item")</td>
+                            <td>class="item"を持つ全要素を取得する。</td>
+                        </tr>
+                        <tr>
+                            <td>#id</td>
+                            <td>id指定</td>
+                            <td>soup.select("#main")</td>
+                            <td>id="main"の要素を取得する。（idは重複なしなので1つ）</td>
+                        </tr>
+                        <tr>
+                            <td>div>p</td>
+                            <td>直下のp</td>
+                            <td>soup.select("div>p")</td>
+                            <td>divタグ直下のpタグのみを取得する。</td>
+                        </tr>
+                        <tr>
+                            <td>div p</td>
+                            <td>子孫のp</td>
+                            <td>soup.select("div p")</td>
+                            <td>divタグ配下の全pタグを取得する。</td>
+                        </tr>
+                        <tr>
+                            <td>tr:nth-child(2)</td>
+                            <td>2番目のtr</td>
+                            <td>soup.select("tr:nth-child(2)")</td>
+                            <td>親要素内での2番目のtrを取得する。</td>
+                        </tr>
+                        <tr>
+                            <td>[data-id="123"]</td>
+                            <td>属性指定</td>
+                            <td>soup.select([data-id="123"])</td>
+                            <td>data-id="123"を持つ要素を取得する。</td>
                         </tr>
                     </table>
-                </div>                
-                <div>
-                    <h2 id="画像の幅、高さ">画像の幅、高さ</h2>                    
-                    <p>alt=""の後に、例：width="1000px"やheight="500px"の属性を追加する。</p>
-                    </p>
-                </div>
-                <div>
-                    <h2 id="idやクラスへのリンクの飛ばし方">idやクラスへのリンクの飛ばし方</h2>
-                    <p>「div id="xxx"」は「<strong>#</strong>xxx」</p>
-                    <p>「div class="xxx"」は「.xxx」</p>
                 </div>
             </ul>            
         </div>
