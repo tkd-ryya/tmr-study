@@ -28,7 +28,8 @@
             <ol>
                 <li><a href="#スタイル設定">seabornのスタイル設定</a></li><br>
                 <li><a href="#グラフに表示するデータの順序">グラフに表示するデータの順序</a></li><br>
-                <li><a href="#Waferマップの書き方">Waferマップの書き方</a></li>
+                <li><a href="#Waferマップの書き方">Waferマップの書き方</a></li><br>
+                <li><a href="#画像をパワポに自動貼り付け">画像をパワポに自動貼り付け</a></li><br>
             </ol>
         </div>
         <div class="main_frame">
@@ -47,7 +48,56 @@
                     <p>norm = Normalize ( vmin = - 24 , vmax = 24 )</p>
                     <p>sc = ax.scatter(df["ChpX"] , df["ChpY"] , c=df["L_Voffset"] , cmap="jet" , norm=norm , s=3 , marker="s")</p>
                     <p>fig.colorbar(sc , ax = ax)</p>
-                    <p>plt.gca().invert_yaxis()</p>
+                    <p>plt.gca().invert_yaxis()</p><br>
+
+                <li id="画像をパワポに自動貼り付け">画像をパワポに自動貼り付け</li>
+                    <p>from pptx import Presentation</p>
+                    <p>from pptx.util import Emu</p>
+                    <p>from PIL import Image</p>
+                    <p>import os</p><br>
+
+                    <p><span style="color: purple;"># 設定</span></p>
+                    <p>image_folder = "images" #url</p>
+                    <p>cols = 5</p>
+                    <p>rows = 10</p>
+                    <p>margin_ratio = 0.1  # 余白（10%）</p><br>
+
+                    <p><span style="color: purple;"># 画像取得</span></p>
+                    <p>image_files = [f for f in os.listdir(image_folder) if f.lower().endswith((".jpg", ".png", ".jpeg"))]</p>
+                    <p>image_files.sort()</p><br>
+
+                    <p><span style="color: purple;"># PPT作成</span></p>
+                    <p>prs = Presentation()</p>
+                    <p>slide = prs.slides.add_slide(prs.slide_layouts[6])</p>
+                    <p>slide_width = prs.slide_width</p>
+                    <p>slide_height = prs.slide_height</p><br>
+                    
+                    <p><span style="color: purple;"># セルサイズ</span></p>
+                    <p>cell_width = slide_width / cols</p>
+                    <p>cell_height = slide_height / rows</p>
+
+                    <p>for idx, img_name in enumerate(image_files):</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;if idx >= cols * rows:</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;break</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;row = idx // cols</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;col = idx % cols</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;img_path = os.path.join(image_folder, img_name)</p><br>
+                        <p>&ensp;&ensp;&ensp;&ensp;<span style="color: purple;"># 画像サイズ取得（ピクセル）</span></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;with Image.open(img_path) as img:</p>
+                            <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;img_w, img_h = img.size</p><br>
+                        <p>&ensp;&ensp;&ensp;&ensp;<span style="color: purple;"># セル内で使えるサイズ（余白考慮）</span></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;usable_w = cell_width * (1 - margin_ratio)</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;usable_h = cell_height * (1 - margin_ratio)</p><br>
+                        <p>&ensp;&ensp;&ensp;&ensp;<span style="color: purple;"># 縦横比維持してスケーリング</span></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;scale = min(usable_w / img_w, usable_h / img_h)</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;new_w = img_w * scale</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;new_h = img_h * scale</p><br>
+                        <p>&ensp;&ensp;&ensp;&ensp;<span style="color: purple;"># セル内中央配置</span></p>
+                        <p>&ensp;&ensp;&ensp;&ensp;left = col * cell_width + (cell_width - new_w) / 2</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;top = row * cell_height + (cell_height - new_h) / 2</p>
+                        <p>&ensp;&ensp;&ensp;&ensp;slide.shapes.add_picture( img_path , left , top , width=new_w , height=new_h)</p><br>                            
+                    <p><span style="color: purple;"># 保存</span></p>
+                    <p>prs.save("output_margin_keep_aspect.pptx")</p>
             </ol>
         </div>
     </main>
