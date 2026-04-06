@@ -28,6 +28,7 @@
             <ol>
                 <li><a href="#スタイル設定">seabornのスタイル設定</a></li><br>
                 <li><a href="#グラフに表示するデータの順序">グラフに表示するデータの順序</a></li><br>
+                <li><a href="#Waferマップの書き方">Waferマップの書き方</a></li>
             </ol>
         </div>
         <div class="main_frame">
@@ -40,6 +41,13 @@
                     <p>order = ["設備1","設備2","設備3"]</p>
                     <p>df["設備"] = pd.Categorical(df["設備"] , categories = order , ordered =True)</p>
                     <p>sns.lineplot(data=df , x="date" , y="value" , hue ="設備")</p><br>
+                
+                <li id="Waferマップの書き方">Waferマップの書き方</li>
+                    <p>from matplotlib.colors import Normalize</p>
+                    <p>norm = Normalize ( vmin = - 24 , vmax = 24 )</p>
+                    <p>sc = ax.scatter(df["ChpX"] , df["ChpY"] , c=df["L_Voffset"] , cmap="jet" , norm=norm , s=3 , marker="s")</p>
+                    <p>fig.colorbar(sc , ax = ax)</p>
+                    <p>plt.gca().invert_yaxis()</p>
             </ol>
         </div>
     </main>

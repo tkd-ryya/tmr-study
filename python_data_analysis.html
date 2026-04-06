@@ -44,6 +44,7 @@
                 <li><a href="#複数のdfをエクセルに纏めて保存する">複数のdfをエクセルに纏めて保存する</a></li>
                 <li><a href="#グラフのPDF化">複数のグラフ画像を1つのPDFで出力する。</a></li>
                 <li><a href="#メモリ最適化">メモリ最適化</a></li>
+                <li><a href="#相関係数">相関係数</a></li>
             </ol>
         </div>
 
@@ -87,7 +88,7 @@
 
                 <li id="欠損値処理">欠損値(Nan)処理</li>
                     <p>① df = df["A"].dropna() # 欠損値の行を削除する。</p>
-                    <p>② df = df["A"].isna() # 欠損値かどうかを判断する。(Ture/Falseをかえす)</p>
+                    <p>② df = df["A"].isna() # 欠損値かどうかを判断する。(Ture/Falseをかえす)</p><br>
                 
                 <li id="sort/drop_duplicates">sort/drop_duplicates</li>
                     <p>① timeの順番で行をソートする。</p>
@@ -146,12 +147,14 @@
                     <P>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;ax.scatterplot(...)</P>
                     <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;plt.tight_layout()</p>
                     <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;pdf.savefig(fig)</p>
-                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;plt.close(fig)</p>
+                    <p>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;plt.close(fig)</p><br>
 
-
-                
                 <li id="メモリ最適化">メモリ最適化</li>
                     <p>df = pd.read_csv(file,dtype={"lot":"category","測定値":"float32"})</p><br>
+                
+                <li id="相関係数">相関係数</li>
+                    <p>correlation = df['A'].corr(df['B'])</p>
+                    <p>print(correlation) </p><br>
 
             </ol>
         </div>
