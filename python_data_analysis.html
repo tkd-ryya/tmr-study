@@ -155,8 +155,59 @@
                 <li id="相関係数">相関係数</li>
                     <p>correlation = df['A'].corr(df['B'])</p>
                     <p>print(correlation) </p><br>
+                <li></li>
+                    <p>def wafer_to_image(df):</p>
+                        <p>max_x = int(df['x'].max())</p>
+                        <p>max_y = int(df['y'].max())</p>
+                        <p>img = np.zeros((max_y + 1, max_x + 1))</p>
+                        <p>for _, row in df.iterrows():</p>
+                            <p>x = int(row['x'])</p>
+                            <p>y = int(row['y'])</p>
+                            <p>v = row['voffset']</p>
+                            <p>img[y, x] = v</p>                        
+                        <p>return img</p>
+                        <p>Step 2：複数ウエハー読み込み</p>
+                        <p>wafers = []</p>
+                        <p>for file in file_list:  # CSVファイル群</p>
+                            <p>df = pd.read_csv(file)</p>
+                            <P>img = wafer_to_image(df)</P>
+                            <p>wafers.append(img)</p>
+                        <p>wafers = np.array(wafers)  # (N, 200, 200)</p>
+                        <p>Step 3：円マスク</p>
+                        <p>def create_mask(size=200):</p>
+                            <p>cx, cy = size//2, size//2</p>
+                            <p>Y, X = np.ogrid[:size, :size]</p>
+                            <p>dist = np.sqrt((X - cx)**2 + (Y - cy)**2)</p>
+                            <p>return dist <= size//2</p>
+                        <p>mask = create_mask(200)</p>
+                        <p>Step 4：ベクトル化</p>
+                        <p>X = []</p>
+                        <p>for wafer in wafers:</p>
+                        <p>v = wafer[mask]   # 円内だけ</p>
+                        <p>X.append(v)</p>
+                        <p>X = np.array(X)  # (N, 約30000)</p>
+                        <p>from sklearn.preprocessing import StandardScaler #正規化</p>
+                        <p>scaler = StandardScaler()</p>
+                        <p>X_scaled = scaler.fit_transform(X)</p>
+                        <p>from sklearn.decomposition import PCA #PCA</p>
+                        <p>pca = PCA(n_components=30)</p>
+                        <P>X_pca = pca.fit_transform(X_scaled)</P>
+                        <p>X_reconstructed = pca.inverse_transform(X_pca) #再構築</p>
+                        <p>errors = np.mean((X_scaled - X_reconstructed)**2, axis=1) #異常スコア</p>
+                        <p>import numpy as np #異常ランキング</p>
+                        <p>idx = np.argsort(errors)[::-1]</p>
+                        <p>for i in idx[:10]:</p>
+                            <p>print(i, errors[i])</p>
+                        <p>import matplotlib.pyplot as plt #異常の「場所」も可視化</p>
+                        <p>i = idx[0]  # 最も異常なウエハー</p>
+                        <p>diff = np.zeros((200, 200))</p>
+                        <p>diff[mask] = np.abs(X_scaled[i] - X_reconstructed[i])</p>
+                        <p>plt.imshow(diff)</p>
+                        <p>plt.colorbar()</p>
+                        <P>plt.title("Anomaly Map")</P>
+                        <p>plt.show()</p>
+                        
 
-            </ol>
         </div>
     </main>
 </body>
