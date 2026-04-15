@@ -1,15 +1,15 @@
 /* すべてのページに適用される設定 */
-html{font-size:16px;font-family:sans-serif;}*{box-sizing:border-box;}
+html{font-size:16px;font-family:"メイリオ";}*{box-sizing:border-box;}
 body{margin:0 0 0 0;}
-p,li,td{line-height:1.7;}
+p{line-height:1.0; padding:0 0 0 20px;}
+li,td{line-height:1.5;}
 a:link{color: #F07D34;text-decoration: none;}
 a:visited{color: #F07D34;text-decoration: none;}
 a:hover{color: #F07D34;text-decoration: underline;}
 a:active{color: #F07D34;text-decoration: underline;}
 img{max-width:100%;}
-p{
-    padding:0 0 0 20px;
-}
+
+
 /* すべてのページに適用　- ヘッダー */
 
 .logo{text-align:center;}
@@ -18,10 +18,12 @@ p{
     padding:0;
     list-style-type:none;
     display:flex;
+    background-color: darkblue;
+    color: white;
     justify-content: center;
-    gap: 20px;}
-.nav a:link{color:#253958;}
-.nav a:visited{color:#253958;}
+    gap: 40px;}
+.nav a:link{color:white;}
+.nav a:visited{color:white;}
 /* すべてのページに適用　- ヒーロー */
 /* すべてのページに適用　- メイン */
 /* すべてのページに適用　- フッター */
@@ -51,11 +53,11 @@ p{
     margin-left: 420px;
     padding:20px
 }
-.table_css_tag{
+.table_tag{
     border-collapse:collapse;
     margin-left: 30px;
 }
-.table_css_tag th, .table_css_tag td{
+.table_tag th, .table_tag td{
     border: 1px solid #dbdbdb;
     padding:10px;
 }
