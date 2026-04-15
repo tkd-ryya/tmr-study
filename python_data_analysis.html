@@ -32,6 +32,7 @@
                 <li><a href="#numeric">dfのA列を数値に変換する。</a></li>
                 <li><a href="#list化">dfのA列をリストに変換する。</a></li>
                 <li><a href="#データフレーム化">リストをデータフレームに変換する。</a></li>
+                <li><a href="#列名取得">列名を取得する。</a></li>
                 <li><a href="#条件抽出">条件抽出</a></li>
                 <li><a href="#groupby">groupby</a></li>
                 <li><a href="#merge">merge</a></li>
@@ -62,7 +63,12 @@
                     <p>A_list = df["A"].to_list()</p><br>
 
                 <li id="データフレーム化">リストをデータフレームに変換する。</li>
-                    <p>df = pd.DateFrame(A_list , columns=["A"])</p><br>
+                    <p>df = pd.DateFrame(A_list , columns=["A"])</p>
+                    <p>or</p>
+                    <p>df = pd.DateFrame({"list_xx":xx , "list_yy":yy , "list_zz":zz}) <span style="color: gray;">#複数の場合はこちらを使う。推奨</span></p><br>
+                
+                <li id="列名取得">列名取得</li>
+                    <p>print(df.columns.tolist())<span style="color: gray;">#リストにすることで省略されず全て表示される。</span></p><br>
 
                 <li id="条件抽出">条件抽出</li>
                     <p>① A列が100以上の行だけを抽出する。</p>
