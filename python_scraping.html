@@ -62,6 +62,45 @@
                     <p>soup.find_all("span",class_=["xxx","yyy"])</p>
                     <br>
             </ol>
+        <h3>playwright</h3>
+            <ol>
+                <li>pipのインストール</li>
+                <code><pre>
+pip install playwright
+playwright install chromium
+                </pre></code>
+                <li>plyawrightの基本</li>
+                <code><pre>
+from playwright.sync_api import sync_playwright
+
+with sync_playwright() as p:
+
+    browser = p.chromium.launch(headless=False) # Chromeを起動
+    page = browser.new_page() # 新しいページを作成
+    page.goto("https://demo.playwright.dev/todomvc/") # webページを開く
+
+
+    # ===============================
+    #  JavaScript実行後のHTMLを取得
+    # ===============================
+    html = page.content()
+    print(html)
+
+    page.wait_for_timeout(3000) # ブラウザが閉じないように待機。単位は「msec」
+
+
+    # 「.new-todo」を見つける方法 → 入力欄で右クリック→検証
+    # 「input class="new-todo" ...」のような内容が確認できる。
+    # classなら「.xxx」、idなら「#xxx」
+    page.locator(".new-todo").fill("Pythonの勉強")
+    page.wait_for_timeout(2000)
+    page.locator(".new-todo").press("Enter")
+    page.wait_for_timeout(2000)
+
+    browser.close()
+   
+                </pre></code>
+            </ol>
     </main>
 </body>
 <footer>
