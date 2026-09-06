@@ -38,37 +38,88 @@
                         <li>テキストを取得するとき：soup.fond().text</li>
                     </ul><br>
                 <li>コード例_01（基本形）</li>
-                    <p>from bs4 import BeautifulSoup</p>
-                    <p>import requests</p>
-                    <p>url="https://www.python.org/"
-                    <p>res = requests.get(url)</p><br>
-                    <p>if res.status.code==200:</p>
-                    <p>&ensp;&ensp;&ensp;&ensp;soup = BeautifulSoup(res.text ,"html.parser")</p>
-                    <p>&ensp;&ensp;&ensp;&ensp;print(soup.find("h2").text)</p>
-                    <p>else:</p>
-                    <P>&ensp;&ensp;&ensp;&ensp;raise</P>
-                    <p>&ensp;&ensp;&ensp;&ensp;print("アクセスに失敗しました。")</p>
-                    <br>
+                    <code><pre>
+import requests
+from bs4 import BeautifulSoup
+
+url="https://www.python.org/"
+res = requests.get(url)
+
+if res.status.code==200:
+    soup = BeautifulSoup(res.text ,"html.parser")
+    print(soup.find("h2").text)
+else:
+    raise
+    print("アクセスに失敗しました。")
+                    </pre></code>
+
                 <li>コード例_02（h2タグの中身をすべて取出したいとき）</li>
-                    <p>for i,h2_tag in enumerate(soup.find_all("h2")):</p>
-                    <p>&ensp;&ensp;&ensp;&ensp;print(i,h2_tag.text)</p>
-                    <br>
+                    <code><pre>
+for i,h2_tag in enumerate(soup.find_all("h2")):
+    print(i,h2_tag.text)
+                    </pre></code>
+
                 <li>コード例_03（find_all()で取得したh2からテキストだけ取得して、h2_text_listに格納したいとき）</li>
-                    <p>h2_text_list=[]</p>
-                    <p>for i,h2_tag in enumerate(soup.find_all("h2")):</p>
-                    <p>&ensp;&ensp;&ensp;&ensp;h2_text_list.append(h2_tag.text)</p>
-                    <br>
+                    <code><pre>
+h2_text_list=[]
+
+for i,h2_tag in enumerate(soup.find_all("h2")):
+    h2_text_list.append(h2_tag.text)
+                    </pre></code>
+
                 <li>コード例_04（xxxクラスとyyyクラスを持つspanタグをすべて取得する。）</li>
-                    <p>soup.find_all("span",class_=["xxx","yyy"])</p>
-                    <br>
+                    <code><pre>
+soup.find_all("span",class_=["xxx","yyy"])
+                    </pre></code>
+                <li>コード例_05</li>
+                    <code><pre>
+# ==============================================
+# # find()メソッドにより、要素指定でa_tagを抽出する。
+# # 引数(id = "", class_ = "")
+# # ==============================================
+#     a_tag_items = soup.find_all("a" , class_ = "book")
+#     print(a_tag_items)
+
+
+# ==============================================
+# HTMLの階層移動でa_tagを抽出する。
+# ==============================================
+#     a_tag_items = soup.body.div.p.next_sibling.next_sibling.a
+#     print("\n\n\n")
+#     print(a_tag_items)
+
+# ==============================================
+# Select()メソッドにより、CSSセレクタで要素を指定する方法。
+# 引数（"div.content>p"など）
+# ==============================================
+#     a_tag_items = soup.select(".book")
+#     # a_tag_items = soup.select("div" , class_ = "recent books")
+#     print("\n\n")
+#     print(a_tag_items)
+#     # print(title)
+
+# for i , item in enumerate(a_tag_items):
+#     print("\n")
+#     print(item)
+#     print("text：" , item.text)
+#     print("href：" , item["href"])
+#     print("class：" , item["class"])
+
+                    </pre></code>
             </ol>
-        <h3>playwright</h3>
+
+
+
+                
+
+            <h3>playwright</h3>
             <ol>
                 <li>pipのインストール</li>
                 <code><pre>
 pip install playwright
 playwright install chromium
                 </pre></code>
+
                 <li>plyawrightの基本</li>
                 <code><pre>
 from playwright.sync_api import sync_playwright

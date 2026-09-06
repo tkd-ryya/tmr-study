@@ -40,6 +40,10 @@
                     <ul>
                         <li><a href="python_scraping.html">スクレイピング</a></li>
                     </ul><br>
+                <li>関数</li>
+                    <ul>
+                        <li><a href="python_関数.html">関数</a></li>
+                    </ul><br>
                 <li>画像解析</li>
                     <ul>
                         <li><a href="python_image_analysis.html">画像解析</a></li>
@@ -57,25 +61,103 @@
         <div class="main_frame">
             <h3>【基本文法】</h3>
                 <ol>
-                    <li>「**」:べき乗  (例：2<strong>**</strong>3 → 8(=2^3))</li>
-                    <li>「//」:除算(余りを捨てる) (例：7<strong>//</strong>3 → 2(=<strong>2</strong>*3+1))</li>
-                    <li>「%」:余剰(余りを取得) (例:7<strong>%</strong>3 → 1(=2*3+<strong>>1</strong>))</li><br>
-                    <li>「"r"」:読み取りモード</li>
-                    <li>「"w"」:新規書き込みモード（既に中身があれば全部消えて上書きされるので注意▲!）</li>
-                    <li>「"a」：追記モード（ファイルがなければ作成、既存の内容は消えない）</li><br>
-                    <li>数字を文字列にする。：str(num)</li>
-                    <li>文字列を数字にする。：int(str)</li><br>
-                    <li>スライス</li>
-                        <img src="images/python_スライス基礎_iloc_01.png" alt="">
+                    <ul><li>四則計算</li></ul>
+                        <ul>「**」:べき乗  (例：2<strong>**</strong>3 → 8(=2^3))</ul>
+                        <ul>「//」:除算(余りを捨てる) (例：7<strong>//</strong>3 → 2(=<strong>2</strong>*3+1))</ul>
+                        <ul>「%」:余剰(余りを取得) (例:7<strong>%</strong>3 → 1(=2*3+<strong>>1</strong>))</ul><br>
 
+                    <ul><li>ファイルの読み書き</li></ul>
+                        <ul>「"r"」:読み取りモード</ul>
+                        <ul>「"w"」:新規書き込みモード（既に中身があれば全部消えて上書きされるので注意▲!）</ul>
+                        <ul>「"a」：追記モード（ファイルがなければ作成、既存の内容は消えない）</ul><br>
 
+                    <ul><li>スライス</li></ul>
+                        <table class="table_tag">
+                            <tr>
+                                <th>pythonコード</th>
+                                <th>説明</th>
+                            </tr>
+                            <tr>
+                                <td>[開始：終了]</td>
+                                <td>開始位置から、終了位置の1つ手前までの要素を取り出す。</td>
+                            </tr>
+                            <tr>
+                                <td>[開始：]</td>
+                                <td>開始位置から最後までを取り出す。</td>
+                            </tr>
+                            <tr>
+                                <td>[：終了]</td>
+                                <td>最初から終了位置の1つ手前までを取り出す。</td>
+                            </tr>
+                            <tr>
+                                <td>[開始:終了:3]</td>
+                                <td>3つ飛ばしで要素を取り出す。3つ目は「ステップ数」</td>
+                            </tr>
+                            <tr>
+                                <td>[::-1]</td>
+                                <td>要素を逆順から取り出す。</td>
+                            </tr>
+                            <tr>
+                                <td>df.iloc[0:10:3 ,:]</td>
+                                <td>dfから[1行目、4行目、7行目、10行目]を取得する。</td>
+                            </tr>
+                            <tr>
+                                <td>df.iloc[0::3 ,:]</td>
+                                <td>終了位置を省略すると、dfから[1行目、4行目、7行目...（最後まで）]を取得する。</td>
+                            </tr>
+                        </table><br>
+
+                    <ul><li>変数の型</li></ul>
+                        <table class="table_tag">
+                            <tr>
+                                <th>型</th>
+                                <th>例</th>
+                                <th>型の意味</th>
+                            </tr>
+                            <tr>
+                                <td>int型</td>
+                                <td>a=1</td>
+                                <td>整数</td>
+                            </tr>
+                            <tr>
+                                <td>float型</td>
+                                <td>a=1.5</td>
+                                <td>実数</td>
+                            </tr>
+                            <tr>
+                                <td>str型</td>
+                                <td>a = "learning" , b = "abc"</td>
+                                <td>文字列</td>
+                            </tr>
+                            <tr>
+                                <td>bool型</td>
+                                <td>a = True , b = False</td>
+                                <td>真偽</td>
+                            </tr>
+                            <tr>
+                                <td>list型</td>
+                                <td>a = [ 1 , 2, 3 ]</td>
+                                <td>配列（書き換え可能）</td>
+                            </tr>
+                            <tr>
+                                <td>tuaple型</td>
+                                <td>a = ( 1, 2 ,3 ) , b = (2 ,)</td>
+                                <td>配列（書き換え不可能）</td>
+                            </tr>
+                            <tr>
+                                <td>ndarray型</td>
+                                <td>a = np.array( [1,2,3 ] )</td>
+                                <td>ベクトルや行列</td>
+                            </tr>
+                        </table>
                 </ol>
 
 
-            <h3>2026夏季休暇のメモ</h3>
+            <h3>【VS Codeで実行のショートカットを作成する方法】</h3>
             <ol>
-                <li>VSCで実行のショートカットを作成する方法</li>
-                    <img src="images/その他_Visual_Studio_Codeのショートカット.png">
+                <li>「Ctrl+K」➡「Ctrl+S」でショートカット設定を開く</li>
+                <li>検索窓に「Pythonファイルを実行」を入力</li>
+                <li>割り当てたいキーを登録する。</li>
             </ol>
         </div>
 

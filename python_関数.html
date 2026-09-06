@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <ul>
+                <li><a href="index.html">home</a></li>
+                <li><a href="TMR.html">TMR関連</a></li>
+                <li><a href="python.html">python</a></li>
+                <li><a href="JMP.html">JMP</a></li>
+                <li><a href="html.html">HTML</a></li>
+                <li><a href="css.html">CSS</a></li>
+                <li><a href="JavaScript.html">JavaScript</a></li>                
+                <li><a href="statistics.html">統計</a></li>
+                <li><a href="memo.html">memo</a></li>
+            </ul>
+        </nav>
+        
+
+    </header>
+    <main>
+        <div class="sidebar">
+            <p><a href="#nav">TOP</a></p>
+            <p><a href="python.html">戻る</a></p><br>
+            <ol>
+                <li><a href="#規格値判定">規格値で判定し、dfに判定列を追加する。</a></li>
+
+            </ol>
+        </div>
+        <div class="main_frame">
+                <ol>
+                    
+                    <li>基本形は「def 関数名():」</li><br>
+                    <h3 id="規格値判定">規格値で判定して、判定列を作成する。</h3>
+                        <pre><code>
+import pandas as pd
+df =pd.DataFrame({"Voffset":[-12,-7,5,9,13]})
+print(df)
+
+def judge_Voffset( Voffset ):
+    if -10 <= Voffset <= 10:
+        return "OK"
+    else:
+        return "NG"
+
+df["判定"] = df["Voffset"].apply(judge_Voffset)
+print(df)
+                        </code></pre>
+                </ol>
+        </div>
+        
+    </main>
+</body>
+<footer>
+
+</footer>
+</html>
