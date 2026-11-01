@@ -52,6 +52,7 @@
                 <li><a href="#正規表現">正規表現</a></li>
                 <li><a href="#不良率の変化見積もり">不良率の変化見積もり</a></li>
                 <li><a href="#不良マップの合成">不良マップの合成</a></li>
+                <li><a href="#パーセンタイル幅">パーセンタイル幅</a></li>
             </ol>
         </div>
 
@@ -393,6 +394,38 @@ plt.colorbar(label="不良率") #カラーバーの表示。これは任意。
 plt.xlabel("x")
 plt.ylabel("y")
 plt.show()
+                    </code></pre>
+                <li id ="パーセンタイル幅">パーセンタイル幅</li>
+                    <pre><code>
+result_list = []
+
+for LOT in LOT_LIST:
+
+    # LOTごとのデータ読み込み
+    df = pd.read_csv("ファイル名.csv")
+
+    # パーセンタイル計算
+    q = df["value"].quantile(0.01, 0.05, 0.50, 0.95, 0.99, 0.001, 0.999])
+
+    result = {}
+
+    # LOT番号
+    result["LOT"] = LOT
+
+    # パーセンタイル幅
+    result["W90"] = q[0.95] - q[0.05] # 中央90%の幅
+    result["W98"] = q[0.99] - q[0.01] # 中央98%の幅
+
+    # 左右の裾の伸び
+    result["Right_Tail"] = ((q[0.99] - q[0.95]) /(q[0.95] - q[0.50]))
+    result["Left_Tail"] = ((q[0.05] - q[0.01]) /(q[0.50] - q[0.05]))
+    <img src="images/Python_ヒストグラム_Tail判定.png" width="500">
+    # より外側のパーセンタイル幅
+    result["W99.8"] = q[0.999] - q[0.001]
+
+    result_list.append(result)
+
+df_result = pd.DataFrame(result_list)
                     </code></pre>
         </div>
     </main>
